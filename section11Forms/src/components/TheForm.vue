@@ -47,6 +47,9 @@
         <label for="how-other">Other</label>
       </div>
     </div>
+    <div class="form-control">
+      <rating-control v-model="rating"></rating-control>
+    </div>
     <div>
         <input id="interest-news" name="confirm" value="interest4" type="checkbox" v-model="confirm"/>
         <label>Agree to terms and conditions</label>
@@ -59,7 +62,11 @@
 
 
 <script>
+import RatingControl from './RatingControl.vue';
 export default {
+  components: {
+    RatingControl
+  },
   data(){
     return {
       userName: '',
@@ -68,6 +75,7 @@ export default {
       checkbox: [],
       radio: null,
       confirm: null,
+      rating: null,
       userNameValidity: 'pending',
     };
   },
@@ -83,6 +91,8 @@ export default {
       console.log(this.checkbox);
       console.log('Radio');
       console.log(this.radio);
+      console.log('Rating');
+      console.log(this.rating);
       console.log('Last Checkbox');
       console.log(this.confirm);
     },
