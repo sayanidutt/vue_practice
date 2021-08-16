@@ -1,4 +1,5 @@
 <template>
+    <div>
     <section>
         <base-card>
             <h2>{{ fullName }}</h2>
@@ -20,6 +21,7 @@
             <p>{{ description }}</p>
         </base-card>
     </section>
+    </div>
 </template>
 
 <script>
@@ -36,12 +38,20 @@ export default {
         );
     },
     computed: {
-        fullName(){
+        /*fullName(){
             return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName;
+        },*/
+        fullName(){
+            if ( this.selectedCoach ) {
+                return this.selectedCoach.firstName + ' ' + this.selectedCoach.lastName;
+            }
+            return "";
         },
         contactLink(){
-            return  '/coaches/' + this.id + '/contact';
+            //return  '/coaches/' + this.id + '/contact';
+            return this.$route.path + '/' + this.id + '/contact';
         },
+        /*
         areas(){
             return this.selectedCoach.areas;
         },
@@ -50,6 +60,24 @@ export default {
         },
         description(){
             return this.selectedCoach.description;
+        }*/
+        areas(){
+            if ( this.selectedCoach ) {
+                return this.selectedCoach.areas;
+            }
+            return "";
+        },
+        rate(){
+            if ( this.selectedCoach ) {
+                return this.selectedCoach.hourlyRate;
+            }
+            return "";
+        },
+        description(){
+            if ( this.selectedCoach ) {
+                return this.selectedCoach.description;
+            }
+            return "";
         }
     }
 }
