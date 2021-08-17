@@ -1,8 +1,7 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
+    <user-data :first-name="firstname" :last-name="lastname" :ujob="ujob"></user-data>
     <h2>{{ user.age }}</h2>
-    <h2>{{ ujob }}</h2>
     <button @click="setAge">Change Age</button>
     <button @click="setJob">Change Job</button>
     <div>
@@ -15,8 +14,12 @@
 
 <script>
 //import { ref } from 'vue';
-import { ref,reactive,computed, watch } from 'vue';
+import UserData from './components/UserData.vue';
+import { ref,reactive,watch,computed,provide } from 'vue';
 export default {
+  components:{
+    UserData
+  },
   setup(){
     //const uname = ref('Peter');
 
@@ -33,6 +36,8 @@ export default {
       //name: 'Peter',
       age: 31 
     })
+
+    provide('userJob',ujob);
 
     //const usernew = toRefs(user);
 
