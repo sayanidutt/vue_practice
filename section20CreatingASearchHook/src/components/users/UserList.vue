@@ -19,10 +19,11 @@
 </template>
 
 <script>
-import { ref, computed,toRefs } from 'vue';
-import useSearch from '../../hooks/search.js';
+import { toRefs } from 'vue';
 
 import UserItem from './UserItem.vue';
+import useSearch from '../../hooks/search.js';
+import useSort from '../../hooks/sort.js';
 
 export default {
   components: {
@@ -31,36 +32,14 @@ export default {
   props: ['users'],
   emits: ['list-projects'],
   setup(props) {
-    /*const enteredSearchTerm = ref('');
-    const activeSearchTerm = ref('');
-
-    const availableUsers = computed(function () {
-      let users = [];
-      if (activeSearchTerm.value) {
-        users = props.users.filter((usr) =>
-          usr.fullName.includes(activeSearchTerm.value)
-        );
-      } else if (props.users) {
-        users = props.users;
-      }
-      return users;
-    });
-
-    watch(enteredSearchTerm, function (newValue) {
-      setTimeout(() => {
-        if (newValue === enteredSearchTerm.value) {
-          activeSearchTerm.value = newValue;
-        }
-      }, 300);
-    });
-
-    function updateSearch(val) {
-      enteredSearchTerm.value = val;
-    }*/
     const { users } = toRefs(props);
-    const {enteredSearchTerm,availableItems,updateSearch} = useSearch(users,'fullName');
 
-    const sorting = ref(null);
+    const { enteredSearchTerm, availableItems, updateSearch } = useSearch(
+      users,
+      'fullName'
+    );
+
+    /*const sorting = ref(null);
     const displayedUsers = computed(function () {
       if (!sorting.value) {
         return availableItems.value;
@@ -80,14 +59,16 @@ export default {
 
     function sort(mode) {
       sorting.value = mode;
-    }
+    }*/
+
+    const {displayedUsers,sorting,sort} = useSort(availableItems,'fullname');
 
     return {
       enteredSearchTerm,
       updateSearch,
       displayedUsers,
       sorting,
-      sort
+      sort,
     };
   },
   // data() {

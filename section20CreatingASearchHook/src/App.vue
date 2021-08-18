@@ -3,6 +3,9 @@
     <user-list :users="activeUsers" @list-projects="selectUser"></user-list>
     <projects-list :user="selectedUser"></projects-list>
   </main>
+  <search-filter>
+    <slot></slot>
+  </search-filter>
 </template>
 
 <script>
@@ -12,11 +15,13 @@ import USER_DATA from './dummy-data.js';
 
 import UserList from './components/users/UserList.vue';
 import ProjectsList from './components/projects/ProjectsList.vue';
+import SearchFilter from './components/SearchFilter.vue';
 
 export default {
   components: {
     UserList,
     ProjectsList,
+    SearchFilter
   },
   setup() {
     const selectedUser = ref(null);
