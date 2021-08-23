@@ -1,121 +1,24 @@
 <template>
-  <section>
-    <header><h1>My Friends</h1></header>
-    <new-friend @add-contact="addContact"></new-friend>
-    <ul>
-      <friend-contact
-        v-for="friend in friends"
-        :key="friend.id"
-        :id="friend.id"
-        :name="friend.name"
-        :phone-number="friend.phoneno"
-        :email-address="friend.email"
-        :is-favourite="friend.isFavourite"
-        @toggle-favourite="toggleFavouriteStatus"
-        @delete="deleteContact">
-      </friend-contact>
-    </ul>
-    <header><h1>Restaurants Listing</h1></header>
-    <new-food @add-foodItem="addFoodItem"></new-food>
-    <ul>
-      <food-type v-for="food in foods" :key="food.id"
-      :id="food.id"
-      :type="food.type"
-      :name="food.name"
-      :price="food.price"
-      :is-favourite="food.isFavouriteFood"
-      @togglefavourite-food="toggleFoodStatus"
-      @delete="deleteFoodItem">
-      </food-type>
-    </ul>
-  </section>
+  <the-navigation></the-navigation>
+  <main>
+    <router-view></router-view>
+  </main>
 </template>
 
 <script>
-import FoodType from './components/FoodType.vue';
-import NewFood from './components/NewFood.vue';
+//import FoodType from './components/FoodType.vue';
+//import NewFood from './components/NewFood.vue';
+//import FriendList from './components/FriendList.vue';
+//import FoodList from './components/FoodList.vue';
 //import NewFriend from './components/NewFriend.vue';
-export default {
-  components: { FoodType, NewFood },
-  //components: { NewFriend },
-  data() {
-    return {
-      friends: [
-        {
-          id: "std1",
-          name: "Peter",
-          phoneno: "8945677566",
-          email: "peter@gmail.com",
-          isFavourite: true,
-        },
-        {
-          id: "std2",
-          name: "John",
-          phoneno: "89412456322",
-          email: "john@gmail.com",
-          isFavourite: false,
-        },
-      ],
-      foods: [
-        {
-          id: 'f1',
-          type: "Chinese",
-          name: "Noodles",
-          price: "200",
-          isFavouriteFood: true,
-        },
-        {
-          id: 'f2',
-          type: "South Indian",
-          name: "Dosha",
-          price: "150",
-          isFavouriteFood: false,
-        }
-
-      ]
-    };
-  },
-  methods: {
-    toggleFavouriteStatus(friendID){
-      const identifiedFriend = this.friends.find(
-        friend => friend.id === friendID
-      );
-      identifiedFriend.isFavourite = !identifiedFriend.isFavourite;
-    },
-    addContact(name,phone,email){
-      const newFriendContact = {
-        id: new Date().toISOString(),
-        name: name,
-        phoneno: phone,
-        email: email,
-        isFavourite: false
-      }
-      this.friends.push(newFriendContact);
-    },
-    deleteContact(friendID){
-      this.friends = this.friends.filter((friend) => friend.id!==friendID);
-    },
-    toggleFoodStatus(foodId){
-      const identifiedFood = this.foods.find(
-        food => food.id === foodId
-      );
-      identifiedFood.isFavouriteFood = !identifiedFood.isFavouriteFood;
-    },
-    addFoodItem(type,name,price){
-      const newFoodItem = {
-        id: new Date().toISOString(),
-        type: type,
-        name: name,
-        price: price,
-        isFavouriteFood: false
-      }
-      this.foods.push(newFoodItem);
-    },
-    deleteFoodItem(foodId){
-      this.foods = this.foods.filter((food) => food.id !== foodId);
-    }
+import TheNavigation from './components/TheNavigation.vue';
+export default{
+  components: {
+    TheNavigation
   }
-};
+}
+
+
 </script>
 
 <style>
